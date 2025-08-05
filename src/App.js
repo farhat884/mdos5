@@ -49,29 +49,16 @@ useEffect(() => {
 
   // Login handler
   const handleLogin = () => {
-    setLoginError('');
-    
-    // Check admin login
-    if (loginForm.username === adminCredentials.username && 
-        loginForm.password === adminCredentials.password) {
-      setCurrentUser({ name: 'Administrator', role: 'admin' });
-      setUserRole('admin');
-      setShowLogin(false);
-      return;
-    }
-
-    // Check student login
-    const student = students.find(s => 
-      s.name.toLowerCase() === loginForm.username.toLowerCase() && 
-      s.password === loginForm.password
+    const user = students.find(
+      s => s.name === loginForm.username && s.password === loginForm.password
     );
 
-    if (student) {
-      setCurrentUser(student);
+    if (user) {
+      setCurrentUser(user);
       setUserRole('student');
       setShowLogin(false);
     } else {
-      setLoginError('Username atau password salah');
+      setLoginError("ID atau password salah.");
     }
   };
 
