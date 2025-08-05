@@ -2,13 +2,13 @@ import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC6dM5UrraX2PIst_UwdPXNP16EkTHPK4Y",
-  authDomain: "mdo2-681ad.firebaseapp.com",
-  projectId: "mdo2-681ad",
-  storageBucket: "mdo2-681ad.firebasestorage.app",
-  messagingSenderId: "679530889634",
-  appId: "1:679530889634:web:807cd3f7b0e0d26dbfb2fb",
-  measurementId: "G-CHM5853B8P"
+  apiKey: "AIzaSyDYqyaY6hbvnt-kTsm2AWYiVgODAMuBjeg",
+  authDomain: "kuota-siswa.firebaseapp.com",
+  projectId: "kuota-siswa",
+  storageBucket: "kuota-siswa.firebasestorage.app",
+  messagingSenderId: "844268543196",
+  appId: "1:844268543196:web:72ba8975912832d4d86819",
+  measurementId: "G-XT1RDD24QD"
 };
 
 const app = initializeApp(firebaseConfig);
