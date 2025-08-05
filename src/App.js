@@ -6,10 +6,24 @@ import { collection, getDocs, addDoc, updateDoc, doc } from 'firebase/firestore'
 
 const StudentQuotaApp = () => {
   // Data siswa dengan password - KOSONG di awal
-  const [students, setStudents] = useState(() => {
-    const savedStudents = localStorage.getItem("students");
-    return savedStudents ? JSON.parse(savedStudents) : [];
-  });
+  const [students, setStudents] = useState([]);
+
+useEffect(() => {
+  const fetchStudents = async () => {
+    try {
+      const querySnapshot = await getDocs(collection(db, "students"));
+      const fetched = querySnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setStudents(fetched);
+    } catch (error) {
+      console.error("❌ Gagal mengambil data dari Firestore:", error);
+    }
+  };
+
+  fetchStudents();
+}, []);
 
 
   // Admin credentials
