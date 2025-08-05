@@ -85,19 +85,29 @@ useEffect(() => {
   };
 
   // Admin functions
-  const addStudent = () => {
+  const addStudent = async () => {
     if (newStudent.name && newStudent.password && newStudent.totalQuota) {
-      const newId = students.length > 0 ? Math.max(...students.map(s => s.id)) + 1 : 1;
-      const newStudentData = {
-        id: newId,
+      const studentData = {
         name: newStudent.name,
         password: newStudent.password,
         quotaUsed: 0,
-        totalQuota: parseInt(newStudent.totalQuota)
+        totalQuota: parseInt(newStudent.totalQuota),
       };
-      setStudents(prevStudents => [...prevStudents, newStudentData]);
-      setNewStudent({ name: '', password: '', totalQuota: '' });
-      setShowAddStudent(false);
+
+      try {
+      // ⬇️ Tambahkan ke Firestore
+        const docRef = await addDoc(collection(db, "students"), studentData);
+
+      // ⬇️ Tambahkan juga ke local state agar UI langsung update
+        setStudents(prev => [...prev, { id: docRef.id, ...studentData }]);
+
+      // Reset form dan modal
+        setNewStudent({ name: '', password: '', totalQuota: '' });
+        setShowAddStudent(false);
+
+      } catch (error) {
+        console.error("❌ Gagal menambahkan ke Firestore:", error);
+      }
     }
   };
 
